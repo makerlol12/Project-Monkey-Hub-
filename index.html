@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monkey Hub Site</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: radial-gradient(circle, #66ccff, #003366);
+            color: white;
+            font-family: Arial, sans-serif;
+            transition: background 2s ease-in-out;
+        }
+
+        /* Loading Screen */
+        #loading {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #loading img {
+            width: 50%;
+            height: auto;
+            animation: fadeIn 2s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        /* Main Content */
+        #content {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            animation: glowEffect 2s infinite alternate;
+        }
+
+        @keyframes glowEffect {
+            from { text-shadow: 0 0 5px cyan, 0 0 10px blue; }
+            to { text-shadow: 0 0 10px cyan, 0 0 20px blue; }
+        }
+
+        /* Running Image */
+        #runningImage {
+            position: absolute;
+            top: 50%;
+            left: -200px;
+            width: 150px;
+            display: none;
+        }
+
+        @keyframes runAcross {
+            from { left: -200px; }
+            to { left: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <img src="https://cdn.discordapp.com/banners/1309404333217157140/28a9ff89fe7f800a3252eb15e17d2fb9.webp?size=1024&format=webp&width=812&height=0" alt="Loading...">
+    </div>
+
+    <div id="content">
+        <h1>Welcome to the Monkey Hub Site</h1>
+        <p>This website is for finding monkey hub easter eggs, tutorials, and probally secerts.</p>
+		<p>https://www.meta.com/en-gb/experiences/monkey-hub-vr/9317558528306570/<p>
+    </div>
+
+    <img id="runningImage" src="https://cdn.discordapp.com/attachments/1309404333674332260/1340749070859239567/Screenshot_2025-02-16_095433-removebg-preview.png?ex=67b37d60&is=67b22be0&hm=881bef14109226ce48d01bec580d7facfc9c69929f64f82025f15a5c9e353a0b&" alt="Running Image">
+
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('loading').style.opacity = '0';
+                document.body.style.background = 'radial-gradient(circle, #66ccff, #003366)';
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('content').style.display = 'block';
+                }, 1000);
+            }, 3000);
+        };
+
+        let hoverTimer;
+        document.body.addEventListener('mousemove', function(event) {
+            if (event.clientX < window.innerWidth * 0.2) {
+                if (!hoverTimer) {
+                    hoverTimer = setTimeout(() => {
+                        let img = document.getElementById('runningImage');
+                        img.style.display = 'block';
+                        img.style.animation = 'runAcross 3s linear forwards';
+                        setTimeout(() => {
+                            img.style.display = 'none';
+                            img.style.animation = '';
+                        }, 3000);
+                    }, 6000);
+                }
+            } else {
+                clearTimeout(hoverTimer);
+                hoverTimer = null;
+            }
+        });
+    </script>
+</body>
+</html>
